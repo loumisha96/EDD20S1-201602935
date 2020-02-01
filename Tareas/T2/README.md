@@ -1,1 +1,2 @@
 # Especificación Informal
+## Moneda:  ###CrearMoneda,
