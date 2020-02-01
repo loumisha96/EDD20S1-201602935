@@ -14,10 +14,9 @@ public class Moneda{
       public int valor;
       public static int cantMonedero;
       public int IDdueño;
-      public static int[][] matriz = new int[5][2];
+      public int cantUsuario;
+      public static int[][] matriz;
 
-      
-      
     /**
      * @param args the command line arguments
      */
@@ -35,7 +34,12 @@ public class Moneda{
         mon.TransferirFrom(1, 0, 5);
         mon.Transferir(0,5);
         mon.TransferirFrom(0, 1, 5);
+        System.out.println("Monedas en el monedero= " + cantMonedero);
         
+    }
+    //se crean con 0 monedas
+    public void AgregarUsuario(String nombre){
+      //  matriz[][] =  
     }
     public Moneda(String nombre, int valor){
         this.nombre = nombre;
@@ -47,6 +51,7 @@ public class Moneda{
         cantMonedero = cantMonedero+valor;
         
     }
+    //del monedero al dueño
     public void Transferir(int IDdueño, int cant ){
         if(cantMonedero< cant){
             System.out.println("No hay monedas");
@@ -55,7 +60,7 @@ public class Moneda{
                 for (int i = 0; i<5; i++){
                     if((IDdueño == matriz[i][0])){
                         matriz[i][1] = matriz[i][1]+cant;
-                        cantMonedero--;
+                        cantMonedero = cantMonedero - cant;
                         System.out.println("El Usuario "+IDdueño+ " tiene " +matriz[i][1]+ " monedas");
                         i=5;
                     }
@@ -85,9 +90,5 @@ public class Moneda{
                 }
             }
         }
-        
-        
     }
-    
-
 }
