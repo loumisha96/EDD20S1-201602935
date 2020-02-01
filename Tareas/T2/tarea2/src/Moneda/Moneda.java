@@ -5,6 +5,8 @@
  */
 package Moneda;
 
+import java.util.Scanner;
+
 /**
  *
  * @author lourd
@@ -22,8 +24,19 @@ public class Moneda{
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        for(int i=0; i<5; i++){
-            matriz[i][0]=i;
+        Scanner dueño = new Scanner(System.in);
+        int nombre;
+        int j;
+        System.out.println("Ingresar cantidad de dueños");
+        j = dueño.nextInt();
+        
+        matriz = new int[j][3];
+        for(int i=0; i<j; i++){
+            System.out.println("Ingresar nombre del dueño");
+            nombre = dueño.nextInt();
+            matriz[i][0]= i;
+            matriz[i][1]= 3;
+            matriz[i][2]= 0;
         }
         Moneda mon = new Moneda("dsg",3);
         mon.CrearMoneda("quetzal", 1);
@@ -59,9 +72,9 @@ public class Moneda{
             
                 for (int i = 0; i<5; i++){
                     if((IDdueño == matriz[i][0])){
-                        matriz[i][1] = matriz[i][1]+cant;
+                        matriz[i][2] = matriz[i][2]+cant;
                         cantMonedero = cantMonedero - cant;
-                        System.out.println("El Usuario "+IDdueño+ " tiene " +matriz[i][1]+ " monedas");
+                        System.out.println("El Usuario "+IDdueño+ " tiene " +matriz[i][2]+ " monedas");
                         i=5;
                     }
                 }
@@ -73,15 +86,15 @@ public class Moneda{
     public void TransferirFrom(int IDdueño1, int IDdueño2, int cant){
         for(int i = 0; i<5; i ++){
             if(matriz[i][0]== IDdueño1){
-                if(matriz[i][1]<cant){
-                    System.out.println("El usuario " +IDdueño+ "no tiene monedas para transferir");
+                if(matriz[i][2]<cant){
+                    System.out.println("El usuario " +IDdueño+ " no tiene monedas para transferir");
                     i=5;
                 }
                 else{
-                    matriz[i][1]=matriz[i][1]-cant;
+                    matriz[i][2]=matriz[i][2]-cant;
                     for(int j=0; j<5; j++){
                         if(matriz[j][0] ==IDdueño2){
-                            matriz[j][1]=matriz[j][1]+cant;
+                            matriz[j][2]=matriz[j][2]+cant;
                             System.out.println("Moneda recibida");
                             j=5;
                         }
