@@ -5,11 +5,14 @@ using namespace std;
 
 class Nodo {
 public:
-	string dato;
+	int carnet;
+	string nombre;
 	Nodo* sig;
-	Nodo(string dato) {
-		this->dato = dato;
+	Nodo(string nombre, int carnet) {
+		this->nombre = nombre;
+		this->carnet = carnet;
 		this->sig = 0;
+		
 	};
 };
 class Lista {
@@ -21,36 +24,49 @@ public:
 	bool vacia() {
 		return primero == 0;
 	}
-	void insertar(string dato) {
-		Nodo* nuevo = new Nodo(dato);
+	void insertar(string nombre, int carnet) {
+		Nodo* nuevo = new Nodo(nombre, carnet);
 		nuevo->sig = primero;
 		primero = nuevo;
 	}
-	Nodo *buscar(string dato) {
-		Nodo* aux = new Nodo(dato);
-		aux = primero;
-		while (aux->dato != dato) {
+	Nodo *buscar(int carnet) {
+		Nodo* aux = primero;
+		while (aux->carnet != carnet) {
 			aux = aux->sig;
 		}
+		cout << "Encontrado " + aux->nombre << endl;
 		return aux;
 	}
 	//elimina al primero en la lista
-	void eliminar() {
+	void eliminar(Nodo *nodo) {
 		Nodo* aux = primero;
-		primero = aux->sig;
-		aux->sig = 0;
+		while (aux->nombre != nodo->nombre) {
+			aux = aux->sig;
+		}
+		aux->sig = 0;//elimina todos los nodos que siguen
 	
+	}
+	void print() {
+		Nodo* aux = primero;
+		while (aux->sig != 0) {
+			cout << aux->nombre << endl;
+			aux = aux->sig;
+		}
+		cout << aux->nombre << endl;
 	}
 };
 int main()
 {
 	Lista* lista = new Lista();
-	lista->insertar("Lourdes");
-	lista->insertar("Mishel");
-	lista->insertar("Lorenzana");
-	lista->insertar("Ochoa");
-	lista->buscar("Mishel");
-	lista->eliminar();
+	Nodo* nodo = new Nodo("Mishel", 201504893);
+	lista->insertar("Lourdes",201602935);
+	lista->insertar("Mishel",201504893);
+	lista->insertar("Lorenzana",201864783);
+	lista->insertar("Ochoa",201754387);
+	lista->print();
+	lista->buscar(201602935);
+	lista->eliminar(nodo);
+	lista->print();
 
 	
 }
