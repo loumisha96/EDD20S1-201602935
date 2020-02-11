@@ -56,18 +56,15 @@ public:
 	nodo* buscar(string s, nodo*aux1, int cont) {
 		bool var = true;
 		nodo *aux = aux1;
-		
 		int cont1=cont;
 		while (var) {
 			for (auto x : s) {
-
 				if (aux->letra == x) {
 					cont1++;
 					if (posinicio < 0)
 						posinicio = cont1;
-					if (aux->sig== 0 || aux->letra == ' ')
+					if (aux->sig== 0 || aux->sig->letra == ' ')
 						posfinal = cont1;
-
 					aux = aux->sig;
 				}
 				else {
@@ -75,24 +72,16 @@ public:
 						if (aux->letra != ' ') {
 							aux = aux->sig;
 							cont1++;
-							
 						}
-
 						else {
 							aux = aux->sig;
-							//cont++;
 							buscar(s, aux, cont1);
 							break;
 						}
-						
-						//break;
 					}
-
 					if (aux->sig == 0) {
 						var = false;
-
 					}
-					//break;
 				}
 			}
 			var = false;
@@ -104,7 +93,6 @@ public:
 				else {
 					if (aux->sig != 0)
 						aux = aux->sig;
-
 				}
 			}
 		}
@@ -112,7 +100,7 @@ public:
 	void sd(string s, nodo* aux1, int cont) {
 		
 		nodo *s1 = buscar(s, aux1, cont);
-		if (cont> 0) {
+		if (posinicio>= 0) {
 			cout << "Valor encontrado: ";
 			cout << s1->letra << endl;
 		}
@@ -143,7 +131,7 @@ int main()
 	lista->insertarPrimero('H');
 	nodo* aux = lista->primero;
 	int cont = -1;
-	lista->sd("A", aux, cont);
+	lista->sd("P", aux, cont);
 	//lista->buscar("M", aux, cont);
 
 	
